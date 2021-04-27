@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Photogram</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="content" class="content content-full-width">
+                    <!-- navigation bar -->
+                    <div class="py-2">
+                        <ul class="profile-header-tab nav nav-tabs">
+                            <li><%= link_to  "HOME", root_path, class: "nav-link" %></li>
+                            <% if logged_in? %>
+                                <li><%= link_to  "PROFILE", user_path(current_user), class: "nav-link" %></li>
+                                <li><%= link_to "LOGOUT", session_path(current_user), method: :delete ,class: "nav-link"%></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                    <%= yield %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>s

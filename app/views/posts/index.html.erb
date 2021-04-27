@@ -1,0 +1,19 @@
+<!-- begin posts-content -->
+<div class="profile-content">
+    <div class="tab-content p-0">
+        <div class="tab-pane fade active show" id="profile-post">
+            <!-- begin timeline for the posts -->
+
+            <!-- bootstrap inline form to create new posts -->
+            <%= render partial: "form", locals: { post: @post }%>
+            <%if @latest %>
+            <div class="container">
+                <hr/>
+                <img src="<%= (url_for(@latest.image))%>" ,class="img-thumbnail rounded mr-3" alt="..." width="300px" height="auto">    
+                <hr />
+                <h6>The uploaded image is having - <%= @latest.caption %>.</h6>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="content" class="content content-full-width">
+                <!-- begin profile -->
+                <div class="profile">
+                    <div class="profile-header">
+                        <div class="profile-header-cover"></div>
+                        <div class="profile-header-content">
+                            <div class="profile-header-img">
+                                <% if @user.avatar.attached? %>
+                                <img src="<%= (url_for(@user.avatar))%>" alt="..." />
+                                <% else %>
+                                <img src="/nouser.jpg" alt="">
+                                <% end %>
+                            </div>
+                            <div class="profile-header-info">
+                                <h4 class="m-t-10 m-b-5"><%= @user.username %></h4>
+                                <p class="m-b-10"><%= @user.email %></p>
+                                <!-- here the option will be given to edit the profile -->
+                                <a href="#" class="btn btn-xs btn-yellow">Edit Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="timeline my-5">
+            <!-- individual posts -->
+            <div class="container" id="posts">
+                <%= render partial:"posts/post", collection: @posts %>
+            </div>
+        </ul>
+    </div>
+</div>

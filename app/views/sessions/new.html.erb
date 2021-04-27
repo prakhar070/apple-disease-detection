@@ -1,0 +1,22 @@
+<div class="container">
+    <!-- user registration form -->
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Create Account</h4>
+            <p class="text-center">Get started with your free account</p>
+            <%= form_for :session, :url => sessions_path do |f| %>
+                <div class="form-group input-group">
+                    <%= f.text_field :username , class: "form-control mb-2 mr-sm-2" ,placeholder: "username" %>
+                </div>
+                <div class="form-group input-group">
+                    <%= f.password_field :password , class: "form-control mb-2 mr-sm-2" ,placeholder: "password" %>
+                </div>
+                <div class="form-group">
+                    <%= f.submit  "Log-In", class: "btn btn-primary" %>
+                </div>
+            <% end %>
+            <p class="text-center">Don't have an account already? 
+                <%= link_to  "Sign-Up", new_user_path %></p>
+        </article>
+    </div> <!-- card.// -->
+</div>

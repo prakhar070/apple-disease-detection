@@ -1,0 +1,15 @@
+<!-- form for creating a new post, also for editing it -->
+<%= form_for post do |f| %>
+    <% if post.errors[:caption].any? %><span id="error"><%= post.errors[:caption][0] %></span><% end %>
+    <%= f.text_field :caption , class: "form-control mb-2 mr-sm-2" ,placeholder: "caption" %>
+
+    <% if post.errors[:image].any? %><span id="error"><%= post.errors[:image][0] %></span><% end %>
+    <div class="input-group mb-2 mr-sm-2">
+        <div class="custom-file">
+            <%= f.file_field :image , class: "custom-file-input" , id: "customFile"%>
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+    </div>
+    <%= f.submit "Post",class: "mb-2 btn btn-dark" %>
+<% end %>
+

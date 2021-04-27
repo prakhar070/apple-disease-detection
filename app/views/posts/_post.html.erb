@@ -1,0 +1,63 @@
+<!-- this renders out a single post -->
+<li>
+    <!-- begin timeline-body -->
+    <div class="timeline-body">
+        <div class="timeline-header">
+            <!-- displays the image of the user who has posted -->
+            <span class="userimage">
+                <% if User.find(post.user_id).avatar.attached? %>
+                <img src="<%= (url_for(User.find(post.user_id).avatar))%>" alt="..." />
+                <% else %>
+                <img src="nouser.jpg" alt="">
+                <% end %>
+            </span>
+            <!-- displays the username of the user -->
+            <span class="username"><%= User.find(post.user_id).username %><small></small></span>
+        </div>
+        <div class="timeline-content">
+            <!-- relevant post details -->
+            <h6><%= post.caption %></h6>
+            <hr/>
+            <img src="<%= (url_for(post.image))%>" ,class="img-thumbnail rounded mr-3" alt="..." width="100%" height="auto">
+        </div>
+        <div class="timeline-likes">
+            <div class="stats-right">
+                <span class="stats-text"><%= post.comments.count %> Comments</span>
+            </div>
+            <div class="stats">
+                <span class="fa-stack fa-fw stats-icon">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
+                </span>
+                <span class="stats-total"><%= post.likes.count %></span>
+            </div>
+        </div>
+        <div class="timeline-footer">
+            <i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i>
+            <%= link_to  "Like", likes_path(:post_id => post.id), method: :post ,class: "mr-3" %>
+            <i class="fa fa-pencil-square-o fa-fw fa-lg m-r-3 "></i>
+            <%= link_to "Edit", edit_post_path(post.id), class: "m-r-15 text-inverse-lighter" %>
+        </div>
+        <div class="timeline-comment-box">
+            <!-- a form to add a new comment -->
+            <%= form_for Comment.new, class: "form-inline" do |f| %>
+                <div class="input-group mb-2 mr-sm-2">
+                    <div class="user mr-2">
+                        <% if current_user.avatar.attached? %>
+                            <img src="<%= (url_for(current_user.avatar))%>" alt="..." />
+                        <% else %>
+                            <img src="nouser.jpg" alt="">
+                        <% end %>
+                    </div>
+                    <%= f.hidden_field :commentable_id, value: post.id %>
+                    <%= f.hidden_field :commentable_type, value: "Post" %>
+                    <%= f.text_field :body, placeholder: "Add a Comment ", class: "form-control mb-2 mr-sm-2"%>
+                    <%= f.submit "comment", class: "btn btn-primary mb-2 rounded-corner"%>
+                </div>
+            <% end %>
+            <!-- render the all the comments related to this post -->
+            <ul style= "list-style: none;"><%= render partial: 'comment', collection: post.comments %></ul>
+        </div>
+        <!-- end timeline-body -->
+</li>
+
